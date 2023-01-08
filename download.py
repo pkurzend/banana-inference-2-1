@@ -24,4 +24,3 @@ model_path = 'stabilityai/stable-diffusion-2-1'
 scheduler = DDIMScheduler.from_pretrained(model_path, subfolder="scheduler")
 tokenizer = CLIPTokenizer.from_pretrained(model_path, subfolder="tokenizer")
 pipe = StableDiffusionPipeline.from_pretrained(model_path, scheduler=scheduler, tokenizer=tokenizer, safety_checker=None, torch_dtype=torch.float16,  revision=None, use_auth_token=HF_AUTH_TOKEN)
-
