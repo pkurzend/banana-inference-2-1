@@ -85,25 +85,16 @@ def inference(model_inputs:dict) -> dict:
         return {'message': "No prompt provided"}
 
 
-    
     s3_file = s3fs.S3FileSystem(key=os.getenv("KEY"), secret=os.getenv("SECRET"), client_kwargs={'endpoint_url':'https://s3.eu-central-1.amazonaws.com'})
      
-
-
     local_path = f"{model_id}/"
     os.makedirs(local_path, exist_ok=True)
 
-
-    s3_text_encoder_path = f"stable-diffusion-finetunings/{user_id}/data/{model_id}/text_encoder/"
+    s3_text_encoder_path = f"stable-diffusion-finetunings/{user_id}/{model_id}/text_encoder/"
     s3_file.get(s3_text_encoder_path, local_path+'text_encoder/', recursive=True)
 
-    s3_unet_path = f"stable-diffusion-finetunings/{user_id}/data/{model_id}/unet/"
-    s3_file.get(s3_unet_path, local_path+'text_encoder/', recursive=True)
-
-
-    s3_model_index_path = f"stable-diffusion-finetunings/{user_id}/data/{model_id}/model_index.json "
-    s3_file.get(s3_model_index_path, local_path+'model_index.json ', recursive=True)
-          
+    s3_unet_path = f"stable-diffusion-finetunings/{user_id}/{model_id}/unet/"
+    s3_file.get(s3_unet_path, local_path+'text_encoder/', recursive=True)    
  
 
     model_path = local_path
