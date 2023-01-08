@@ -2,17 +2,24 @@
 # Run it with `python3 test.py``
 
 import requests
-import base64
-from io import BytesIO
-from PIL import Image
 
-model_inputs = {'prompt': 'realistic field of grass'}
+
+
+model_inputs = {
+    "prompt": "xyz jonny depp",
+    "negative_prompt": "blurry, toy, cartoon, animated, underwater, photoshop, bad form, close",
+    "height": 512,
+    "width": 512,
+    "num_inference_steps": 50,
+    "guidance_scale": 7.5,
+    "seed": None,
+    "user_id" : "philip",
+    "model_id" : "f85ee87b6dbf4409b00faa4cd9660a83"
+
+}
 
 res = requests.post('http://localhost:8000/', json = model_inputs)
 
-image_byte_string = res.json()["image_base64"]
+print(res.json())
 
-image_encoded = image_byte_string.encode('utf-8')
-image_bytes = BytesIO(base64.b64decode(image_encoded))
-image = Image.open(image_bytes)
-image.save("output.jpg")
+
